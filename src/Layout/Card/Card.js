@@ -20,7 +20,7 @@ function Card({ card = { front: "front", back: "back" }, index, handleDeleteCard
 
                         {/* Clicking the Delete button shows a warning message before deleting the deck */}
                         <button data-index={card.id} className="btn btn-danger" onClick={handleDeleteCard}>
-                            <i class="bi bi-trash-fill"></i> Delete
+                            <i data-index={card.id} class="bi bi-trash-fill"></i> Delete
                         </button>
                     </div>
                 </div>

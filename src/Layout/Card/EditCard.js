@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { readDeck, readCard, updateCard } from "../../utils/api/index";
 import BreadCrumbNav from "../Common/BreadCrumbNav";
+import CardForm from "./CardForm";
 
 function EditCard() {
     const { deckId, cardId } = useParams();
@@ -42,20 +43,9 @@ function EditCard() {
         <>
             <BreadCrumbNav link={`/decks/${deck.id}`} linkName={deck.name} pageName={"Edit Card"} />
             <div className="row">
-                <h4>Edit Card</h4>
+                <h3>Edit Card</h3>
             </div>
-            <form className="row" onSubmit={handleEditCard}>
-                <div className="form-group w-100">
-                    <label className="font-weight-bold" htmlFor="deck-description">Front</label>
-                    <textarea type="text" required className="form-control" onChange={handleFrontChange} defaultValue={card.front} />
-                </div>
-                <div className="form-group w-100">
-                    <label className="font-weight-bold" htmlFor="deck-description">Back</label>
-                    <textarea required className="form-control" onChange={handleBackChange} defaultValue={card.back} />
-                </div>
-                <Link to={`/decks/${deck.id}`}> <button className="btn btn-secondary mr-2">Cancel</button></Link>
-                <button className="btn btn-primary" type="submit">Submit</button>
-            </form>
+            <CardForm onSubmit={handleEditCard} handleFrontChange={handleFrontChange} handleBackChange={handleBackChange} />
         </>
     );
 }

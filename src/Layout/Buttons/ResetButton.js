@@ -3,7 +3,7 @@ import React from "react";
 function ResetButton({ reset }) {
     return (
         <>
-            <div id="ResetBtn" className="justify-content-center mt-1 btn btn-primary ml-2 mb-3" onClick={reset}>
+            <div id="resetBtn" className="justify-content-center mt-1 btn btn-primary ml-2 mb-3" onClick={reset}>
                 Reset
             </div>
         </>

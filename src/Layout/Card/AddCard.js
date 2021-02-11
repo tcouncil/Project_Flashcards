@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { readDeck, createCard } from "../../utils/api/index";
 import BreadCrumbNav from "../Common/BreadCrumbNav";
+import CardForm from "./CardForm";
+
 function AddCard() {
     const { deckId, cardId } = useParams();
     const [deck, setDeck] = useState("");
@@ -19,6 +21,9 @@ function AddCard() {
             "id": cardId
         };
         createCard(deckId, newCard);
+
+        const fetchDeck = async () => setDeck(await readDeck(deckId));
+        fetchDeck();
         history.push(`/decks/${deckId}`);
     }
 
@@ -27,7 +32,7 @@ function AddCard() {
         const fetchDeck = async () => setDeck(await readDeck(deckId, abortController.signal));
         fetchDeck();
         return () => abortController.abort();
-    }, [deckId]);
+    }, [deckId, history]);
 
     const handleFrontChange = (e) => setFront(e.target.value);
     const handleBackChange = (e) => setBack(e.target.value);
@@ -35,20 +40,9 @@ function AddCard() {
         <>
             <BreadCrumbNav link={`/decks/${deck.id}`} linkName={deck.name} pageName={"Add Card"} />
             <div className="row d-flex">
-                <h4 className="mr-1">{deck.name}:</h4><h4>Add Card</h4>
+                <h3 className="mr-1">{deck.name}:</h3><h3>Add Card</h3>
             </div>
-            <form className="row" onSubmit={handleAddCard}>
-                <div className="form-group w-100">
-                    <label className="font-weight-bold" htmlFor="deck-description">Front</label>
-                    <textarea type="text" required className="form-control" onChange={handleFrontChange} placeholder={"Front side of card"} />
-                </div>
-                <div className="form-group w-100">
-                    <label className="font-weight-bold" htmlFor="deck-description">Back</label>
-                    <textarea type="text" required className="form-control" onChange={handleBackChange} placeholder={"Back side of card"} />
-                </div>
-                <Link to="/"><button className="btn btn-secondary mr-2">Done</button></Link>
-                <button className="btn btn-primary" type="submit">Save</button>
-            </form>
+            <CardForm onSubmit={handleAddCard} handleFrontChange={handleFrontChange} handleBackChange={handleBackChange}/>
         </>
     );
 }

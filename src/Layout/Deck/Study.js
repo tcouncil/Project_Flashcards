@@ -69,7 +69,7 @@ function Study() {
             <>
                 <BreadCrumbNav link={`/decks/${deckId}`} linkName={deck.name} pageName={'Study'} />
                 <div className="row">
-                    <h1>Study: {deck.name}</h1>
+                    <h2>Study: {deck.name}</h2>
                 </div>
                 { cardTotal > 2 ? <StudyCard cardText={cardText} onBack={onBack} onEnd={onEnd} cardNum={cardNum} setCardNum={setCardNum} cardTotal={cardTotal} next={next} flip={flip} reset={reset} /> : <StudyNotEnoughCards cardLength={cardTotal} />}
             </>

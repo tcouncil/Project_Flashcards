@@ -42,7 +42,7 @@ function DeckCard({ deck = {}, index, setDecks }) {
 
                     {/* Clicking the Delete button shows a warning message before deleting the deck */}
                     <button data-index={deck.id} className="btn btn-danger" onClick={handleDeleteDeck}>
-                        <i class="bi bi-trash-fill"></i> Delete
+                        <i data-index={deck.id} class="bi bi-trash-fill"></i> Delete
                     </button>
                 </div>
             </div>
