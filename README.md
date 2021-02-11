@@ -1,5 +1,4 @@
 # Project_Flashcards
-A Thinkful Project
 Create decks of flashcards to study with Flash-o-matic!
 
 ## npm start
